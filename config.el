@@ -147,3 +147,5 @@
 (setq window-divider-default-right-width 3)
 (setq window-divider-default-places 'right-only)
 (window-divider-mode)
+(add-hook 'prog-mode-hook #'rainbow-delimeters-mode-enable)
+(setq shell-file-name (executable-find "zsh"))
