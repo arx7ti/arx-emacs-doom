@@ -139,13 +139,13 @@
 
 (envrc-global-mode)
 (display-time-mode)
-
+(window-divider-mode)
 ;; (add-to-list 'org-structure-template-alist
 ;;              '("j" . "src jupyter-python :async yes"))
 (add-to-list 'display-buffer-alist
 	     '("\\*Async Shell Command\\*.*" display-buffer-no-window))
 (setq window-divider-default-right-width 3)
 (setq window-divider-default-places 'right-only)
-(window-divider-mode)
-(add-hook 'prog-mode-hook #'rainbow-delimeters-mode-enable)
 (setq shell-file-name (executable-find "zsh"))
+(set-company-backend! '(hy-mode) 'company-hy)
+(add-hook 'hy-mode-hook 'rainbow-delimiters-mode)
