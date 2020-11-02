@@ -26,7 +26,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-font (font-spec :family "monospace" :size 20))
-(setq doom-theme 'doom-molokai)
+(setq doom-theme 'doom-gruvbox)
 (setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -149,3 +149,9 @@
 (setq shell-file-name (executable-find "zsh"))
 (set-company-backend! '(hy-mode) 'company-hy)
 (add-hook 'hy-mode-hook 'rainbow-delimiters-mode)
+;; screenshots
+(defun take-full-screen-screenshot ()
+  "Uses 'maim' to take full-screen screenshot"
+  (interactive)
+  (start-process-shell-command
+   "maim" nil "mkdir -p ~/screenshots/ && maim ~/screenshots/$(date +%s).png"))
