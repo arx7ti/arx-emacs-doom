@@ -55,22 +55,30 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; screenshots
+
+;; exwm config
 (use-package! exwm-config
   :after exwm
   :init
   (defun switch-system-im ()
     (interactive)
     (start-process-shell-command "xkb-switch" nil "xkb-switch -n"))
+  (defun exwm-screenshot ()
+    (interactive)
+    (start-process-shell-command
+     "maim" nil "mkdir -p ~/screenshots/ && maim ~/screenshots/$(date +%s).png")
+    (message "screenshot has been taken"))
   :config
   (setq exwm-input-global-keys
         `(([?\s-r] . exwm-reset)
           ([?\s-w] . exwm-workspace-switch)
           (\,@ (mapcar (lambda (i)
-                         `(,(kbd (format "s-%d" i)) .
-                           (lambda ()
-                             (interactive)
-                             (exwm-workspace-switch-create ,i))))
-                       (number-sequence 0 9)))
+                          `(,(kbd (format "s-%d" i)) .
+                            (lambda ()
+                              (interactive)
+                              (exwm-workspace-switch-create ,i))))
+                        (number-sequence 0 9)))
           (,(kbd "s-&") . (lambda (command)
                             (interactive (list (read-shell-command ">> ")))
                             (start-process-shell-command command nil command)))
@@ -81,7 +89,8 @@
           (,(kbd "s-'") . +eshell/toggle)
           (,(kbd "s-t") . +vterm/toggle)
           (,(kbd "s-v") . counsel-set-clip)
-          (,(kbd "s-a") . switch-system-im)))
+          (,(kbd "s-a") . switch-system-im)
+          (,(kbd "s-/") . exwm-screenshot)))
 
   (when (featurep! +sim-duplicate)
     (when (featurep! :personal russian)
@@ -149,9 +158,3 @@
 (setq shell-file-name (executable-find "zsh"))
 (set-company-backend! '(hy-mode) 'company-hy)
 (add-hook 'hy-mode-hook 'rainbow-delimiters-mode)
-;; screenshots
-(defun take-full-screen-screenshot ()
-  "Uses 'maim' to take full-screen screenshot"
-  (interactive)
-  (start-process-shell-command
-   "maim" nil "mkdir -p ~/screenshots/ && maim ~/screenshots/$(date +%s).png"))
