@@ -74,11 +74,11 @@
         `(([?\s-r] . exwm-reset)
           ([?\s-w] . exwm-workspace-switch)
           (\,@ (mapcar (lambda (i)
-                          `(,(kbd (format "s-%d" i)) .
-                            (lambda ()
-                              (interactive)
-                              (exwm-workspace-switch-create ,i))))
-                        (number-sequence 0 9)))
+                         `(,(kbd (format "s-%d" i)) .
+                           (lambda ()
+                             (interactive)
+                             (exwm-workspace-switch-create ,i))))
+                       (number-sequence 0 9)))
           (,(kbd "s-&") . (lambda (command)
                             (interactive (list (read-shell-command ">> ")))
                             (start-process-shell-command command nil command)))
@@ -158,3 +158,7 @@
 (setq shell-file-name (executable-find "zsh"))
 (set-company-backend! '(hy-mode) 'company-hy)
 (add-hook 'hy-mode-hook 'rainbow-delimiters-mode)
+(after! lsp-haskell
+  (setq lsp-haskell-process-path-hie
+        (executable-find
+         "haskell-language-server-wrapper")))
