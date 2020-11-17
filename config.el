@@ -162,3 +162,9 @@
   (setq lsp-haskell-process-path-hie
         (executable-find
          "haskell-language-server-wrapper")))
+;;
+(add-to-list 'after-make-frame-functions
+             #'(lambda (frame)
+                 (set-frame-parameter frame
+                                      'internal-border-width 5)))
+
