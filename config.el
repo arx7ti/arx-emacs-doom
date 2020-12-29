@@ -26,7 +26,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-font (font-spec :family "monospace" :size 20))
-(setq doom-theme 'doom-gruvbox-light)
+(setq doom-theme 'doom-one)
 (setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
